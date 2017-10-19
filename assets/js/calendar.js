@@ -39,7 +39,10 @@ function add_data(data) {
             row.append($("<td>").append(item))
         })
         // add duration
-        row.append($("<td>").append("undefined bruh"))
+        start_date = Date.parse(el[2]);
+        end_date = Date.parse(el[3]);
+        duration = new TimeSpan(end_date - start_date);
+        row.append($("<td>").append(duration.days + " dies"))
         // add row
         table_body.append(row)
     })
