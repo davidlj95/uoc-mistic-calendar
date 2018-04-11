@@ -18,7 +18,7 @@ function loaded_events(data, status, jqxhr) {
     }
     // remove invalid columns
     for (i = 0; i < csv.length; i++) {
-        if(csv[i].length < 4) {
+        if(csv[i].length < 5) {
             csv.splice(i, 1)
         }
     }
@@ -35,14 +35,18 @@ function add_data(data) {
     data.forEach(function(el){
         row = $("<tr class='addedRows'>")
         // add info
-        el.forEach(function(item) {
-            row.append($("<td>").append(item))
-        })
+	for(i=0;i<el.length-1;i++) {
+		row.append($("<td>").append(el[i]))
+	}
         // add duration
         start_date = Date.parse(el[2]);
         end_date = Date.parse(el[3]);
         duration = new TimeSpan(end_date - start_date);
         row.append($("<td>").append(duration.days + " dies"))
+	// check if done
+	if(el[4] == "1") {
+		row.css("background-color", "GreenYellow")
+	}
         // add row
         table_body.append(row)
     })
